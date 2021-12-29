@@ -1,0 +1,220 @@
+﻿<Window x:Class="Vysivacka.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vysivacka"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Title="Vyšívačka" Icon="Images/vysivacka.jpg"
+        MinHeight="550" MinWidth="1250" SizeToContent="WidthAndHeight">
+
+    <Grid Background="Gray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="820"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Prvek Rectangle sloužící jako pozadí horní lišty s kontrolkami -->
+        <Rectangle Fill="LightGray" Margin="5" Grid.ColumnSpan="2"/>
+
+        <!-- Plátno Canvas -->
+        <Canvas x:Name="platnoCanvas" Grid.Row="1" Margin="5,5,0,0" Background="Transparent" />
+
+        <!-- Horní lišta s kontrolkami -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="2">
+
+            <!-- Tlačítko Vyšívej -->
+            <Button x:Name="vysivejButton" IsDefault="True" Width="80" Height="30" Margin="10,0,0,0" Content="Vyšívej" Click="VysivejButton_Click">
+                <Button.ToolTip>Spustí vyšívání</Button.ToolTip>
+            </Button>
+            
+            <!-- Tlačítko Pauza -->
+            <Button x:Name="pauzaButton" Width="80" Height="30" Margin="10,0,0,0" Content="Pauza" Click="PauzaButton_Click">
+                <Button.ToolTip>Přeruší vyšívání</Button.ToolTip>
+            </Button>
+
+            <!-- Tlačítko Stop / Reset -->
+            <Button x:Name="stopButton" Width="80" Height="30" Margin="10,0,0,0" Content="Stop / Reset" Click="StopButton_Click">
+                <Button.ToolTip>Ukončí vyšívání a obnoví kontrolky</Button.ToolTip>
+            </Button>
+
+            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Styl vyšívání:</TextBlock>
+
+            <!-- ComboBox pro Styl vyšívání -->
+            <ComboBox x:Name="stylComboBox" Width="130" Height="30" Margin="2,0,0,0" SelectedIndex="0" VerticalContentAlignment="Center" >
+                <ComboBoxItem IsSelected="True">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/down_arrow_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Dolů</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/up_arrow_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Nahoru</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/right_arrow_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Doprava</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/arrow_left_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Doleva</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/arrow_down_right_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Cik cak shora</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/arrow_right_up_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Cik cak zdola</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/spiral_icon.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Spirála</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
+
+            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Vzor:</TextBlock>
+
+            <!-- ComboBox pro Vzor vyšívání -->
+            <ComboBox x:Name="vzorComboBox" SelectedIndex="0" Width="110" Height="30" Margin="2,0,0,0"
+                      VerticalContentAlignment="Center">
+                <ComboBoxItem IsSelected="True">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/CSharp.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">C# > Java</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Height="15" Width="15" Source="/Images/Java.png" />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Java > C#</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
+
+            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Barva plátna:</TextBlock>
+
+            <!-- ComboBox pro Barvu plátna -->
+            <ComboBox x:Name="barvaPlatnaComboBox" SelectedIndex="0" Width="90" Height="30" Margin="2,0,0,0"
+                      VerticalContentAlignment="Center">
+                <ComboBoxItem IsSelected="True">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="White" Height="15" Width="15"  />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Bílá</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="Blue" Height="15" Width="15"  />
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Modrá</TextBlock>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
+
+            <!-- Prvek Ellipse pro zobrazení LED znázorňující stav, že je Vyšívačka v činnosti -->
+            <Ellipse Width="20" Height="20" x:Name="ledka" Margin="10,0,0,0" Fill="LightGray" />
+
+            <!-- TextBlocky zobrazující počet stehů, které zbývá vyšít a jméno aktuálního vyšívače -->
+            <TextBlock Text="Zbývá vyšít " VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <TextBlock Name="odpocetTextBlock" Text="{Binding PocetStehuOdpocet}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text=" stehů. Vyšívač: " VerticalAlignment="Center" />
+            <TextBlock x:Name="jmenoPoslednihoVysivace" Text="{Binding JmenoPoslednihoVysivace}" VerticalAlignment="Center" />
+        </StackPanel >
+
+        <!-- StackPanel s Rectangly pro volbu barvy stehu během vyšívání, aktuálně se tato hodnota neukládá do kolekce pláten. -->
+        <StackPanel x:Name="barvyStackPanel" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
+            <TextBlock Text="Barva stehů: " VerticalAlignment="Center"/>
+            <Rectangle Height="30" Width="30" Fill="Red" Margin="2,0,0,0" MouseDown="Barva_MouseDown"/>
+            <Rectangle Height="30" Width="30" Fill="Blue" Margin="10,0,0,0" MouseDown="Barva_MouseDown"/>
+        </StackPanel>
+
+        <!-- ListView zobrazující kolekci uložených pláten -->
+        <ListView Name="osobyListView" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Margin="5,5,5,5" ItemsSource="{Binding Osoby}" 
+                      SelectionChanged="OsobyListView_SelectionChanged" Background="LightGray" FontSize="12" FontWeight="Bold" Foreground="Black">
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="40">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="StylVysivaniOsoby" Click="OsobyListViewColumnHeader_Click">Styl</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding StylVysivaniImagePath}" Height="15" Width="15"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="40">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="VzorVysivaniOsoby" Click="OsobyListViewColumnHeader_Click">Vzor</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding VzorVysivaniImagePath}" Height="15" Width="15"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="85">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="BarvaPlatnaOsoby" Click="OsobyListViewColumnHeader_Click">Barva plátna</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Rectangle Fill="{Binding BarvaPlatnaImagePath}" Height="15" Width="60"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="120" DisplayMemberBinding="{Binding Jmeno}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Jmeno" Click="OsobyListViewColumnHeader_Click">Jméno</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100" >
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="StavDokonceni" Click="OsobyListViewColumnHeader_Click">Dokončeno</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar Width="100" Value="{Binding StavDokonceni}" Height="15" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- StackPanel s tlačítky Ulož a Smaž -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button x:Name="ulozButton" Width="80" Height="30" Margin="10,0,0,0" Content="Ulož" Click="UlozButton_Click">
+                <Button.ToolTip>Uloží rozpracované / hotové plátno do seznamu</Button.ToolTip>
+            </Button>
+            <Button x:Name="smazButton" Width="80" Height="30" Margin="10,0,0,0" Content="Smaž" Click="SmazButton_Click">
+                <Button.ToolTip>Zobrazí okno s plátny ke smazání</Button.ToolTip>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
+

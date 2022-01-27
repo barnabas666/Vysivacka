@@ -14,8 +14,9 @@ namespace Vysivacka
     {
         /// <summary>
         /// Cesta k souboru s daty
-        /// </summary>
-        private string cesta = "seznamOsob.xml";
+        /// </summary>        
+        private string cesta = Path.GetFullPath(@"..\..\seznamOsob.xml");
+
         /// <summary>
         /// Jméno posledního (aktuálního) vyšívače.
         /// </summary>

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -15,7 +10,7 @@ namespace Vysivacka
     /// <summary>
     /// Třída zajišťující vyšívání
     /// </summary>
-    public class Vysivani : INotifyPropertyChanged
+    class Vysivani : INotifyPropertyChanged
     {
         /// <summary>
         /// Aktuální sloupec a řádek plátna
@@ -131,17 +126,11 @@ namespace Vysivacka
             get
             {
                 Color barvaLedky = (ledka.Fill as SolidColorBrush).Color;
-                if (barvaLedky == Colors.LightGray)
-                    return false;
-                else
-                    return true;
+                return barvaLedky != Colors.LightGray;
             }
             set
             {
-                if (value)
-                    ledka.Fill = new SolidColorBrush(Colors.LimeGreen);
-                else
-                    ledka.Fill = new SolidColorBrush(Colors.LightGray);
+                ledka.Fill = value ? new SolidColorBrush(Colors.LimeGreen) : new SolidColorBrush(Colors.LightGray);
             }
         }
 

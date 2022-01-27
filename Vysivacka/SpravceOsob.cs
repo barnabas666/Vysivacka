@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Vysivacka
@@ -33,6 +30,9 @@ namespace Vysivacka
             }
         }
         private ObservableCollection<Osoba> osoby;
+        /// <summary>
+        /// Kolekce osob - vyšívačů
+        /// </summary>
         public ObservableCollection<Osoba> Osoby
         {
             get => osoby;
@@ -53,7 +53,7 @@ namespace Vysivacka
         public void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         /// <summary>
-        /// Přidá / edituje novou osobu.
+        /// Přidá / edituje novou osobu - vyšívače.
         /// </summary>
         /// <param name="pocetStehu"></param>
         public void PridejOsobu(string jmeno, int pocetStehu, int pocetStehuCelkem, StylVysivani styl, VzorVysivani vzor, BarvaPlatna barva)
@@ -62,7 +62,7 @@ namespace Vysivacka
             if (!string.IsNullOrEmpty(JmenoPoslednihoVysivace))
             {
                 if (JmenoPoslednihoVysivace != jmeno)
-                    throw new ArgumentException("Tohle plátno patří vyšívači jménem " + JmenoPoslednihoVysivace + ". Tohle je vyšívačka, ne kopírka.");                
+                    throw new ArgumentException($"Tohle plátno patří vyšívači jménem { JmenoPoslednihoVysivace }. Tohle je vyšívačka, ne kopírka.");
                 else
                 {
                     var nalezenyVysivac = Osoby.FirstOrDefault(c => c.Jmeno == jmeno);
@@ -97,7 +97,7 @@ namespace Vysivacka
         }
 
         /// <summary>
-        /// Odebere osobu z kolekce
+        /// Odebere osobu - vyšívače z kolekce
         /// </summary>
         /// <param name="osoba">Osoba k odebrání</param>
         public void Odeber(Osoba osoba)
@@ -106,7 +106,7 @@ namespace Vysivacka
         }
 
         /// <summary>
-        /// Vrátí osobu ze souboru.
+        /// Vrátí kolekci osob - vyšívačů ze souboru.
         /// </summary>
         public void NactiOsoby()
         {
@@ -124,7 +124,7 @@ namespace Vysivacka
         }
 
         /// <summary>
-        /// Uloží osobu do souboru.
+        /// Uloží kolekci osob - vyšívačů do souboru.
         /// </summary>
         public void UlozOsoby()
         {

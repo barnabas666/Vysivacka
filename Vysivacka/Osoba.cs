@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace Vysivacka
 {
@@ -99,15 +94,6 @@ namespace Vysivacka
                         return Brushes.White;
                 }
             }
-        }
-
-        /// <summary>
-        /// Zobrazení osoby pro případ, kdy není použita v xaml šablona.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return Jmeno + ", " + StylVysivaniOsoby + ", " + VzorVysivaniOsoby + ", " + BarvaPlatnaOsoby + ", " + PocetZbyvajicichStehu + ", " + StavDokonceni;
         }
     }
 }

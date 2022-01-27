@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Vysivacka
 {
@@ -63,7 +54,7 @@ namespace Vysivacka
         {
             if (smazListView.SelectedItem != null)
             {
-                MessageBoxResult result = MessageBox.Show("Opravdu chceš smazat plátno vyšívače s jménem " + ((Osoba)smazListView.SelectedItem).Jmeno + "?", "Smaž", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show($"Opravdu chceš smazat plátno vyšívače s jménem { ((Osoba)smazListView.SelectedItem).Jmeno }?", "Smaž", MessageBoxButton.YesNo);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
@@ -102,7 +93,7 @@ namespace Vysivacka
 
             ListSortDirection novySmer = ListSortDirection.Ascending; // Volba směru
             if (smazListViewSortSloupec == sloupec && smazListViewSortAdorner.SmerTrideni == novySmer) // Pokud se právě podle daného sloupce třídilo, změní se směr
-                novySmer = ListSortDirection.Descending; 
+                novySmer = ListSortDirection.Descending;
 
             smazListViewSortSloupec = sloupec;
             smazListViewSortAdorner = new SortAdorner(smazListViewSortSloupec, novySmer); // Nová instance SortAdorner s vybraným sloupcem a směrem třídění

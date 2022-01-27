@@ -43,8 +43,9 @@
                 <Button.ToolTip>Ukončí vyšívání a obnoví kontrolky</Button.ToolTip>
             </Button>
 
+            <!-- TextBlock - Styl vyšívání -->
             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Styl vyšívání:</TextBlock>
-
+            
             <!-- ComboBox pro Styl vyšívání -->
             <ComboBox x:Name="stylComboBox" Width="130" Height="30" Margin="2,0,0,0" SelectedIndex="0" VerticalContentAlignment="Center" >
                 <ComboBoxItem IsSelected="True">
@@ -91,6 +92,7 @@
                 </ComboBoxItem>
             </ComboBox>
 
+            <!-- TextBlock - Vzor vyšívání -->
             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Vzor:</TextBlock>
 
             <!-- ComboBox pro Vzor vyšívání -->
@@ -110,6 +112,7 @@
                 </ComboBoxItem>
             </ComboBox>
 
+            <!-- TextBlock - Barva plátna -->
             <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Barva plátna:</TextBlock>
 
             <!-- ComboBox pro Barvu plátna -->
@@ -132,17 +135,28 @@
             <!-- Prvek Ellipse pro zobrazení LED znázorňující stav, že je Vyšívačka v činnosti -->
             <Ellipse Width="20" Height="20" x:Name="ledka" Margin="10,0,0,0" Fill="LightGray" />
 
-            <!-- TextBlocky zobrazující počet stehů, které zbývá vyšít a jméno aktuálního vyšívače -->
+            <!-- TextBlock - Zbývá vyšít -->
             <TextBlock Text="Zbývá vyšít " VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+            <!-- TextBlock - Binding na property PocetStehuOdpocet -->
             <TextBlock Name="odpocetTextBlock" Text="{Binding PocetStehuOdpocet}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <!-- TextBlock - Vyšívač -->
             <TextBlock Text=" stehů. Vyšívač: " VerticalAlignment="Center" />
+
+            <!-- TextBlock - Binding na property JmenoPoslednihoVysivace -->
             <TextBlock x:Name="jmenoPoslednihoVysivace" Text="{Binding JmenoPoslednihoVysivace}" VerticalAlignment="Center" />
         </StackPanel >
-
-        <!-- StackPanel s Rectangly pro volbu barvy stehu během vyšívání, aktuálně se tato hodnota neukládá do kolekce pláten. -->
+        
         <StackPanel x:Name="barvyStackPanel" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,0,10,0">
+            
+            <!-- TextBlock - Barva stehů -->
             <TextBlock Text="Barva stehů: " VerticalAlignment="Center"/>
+            
+            <!-- Rectangle s volbou červené barvy, aktuálně se změna barvy neukládá do kolekce pláten -->
             <Rectangle Height="30" Width="30" Fill="Red" Margin="2,0,0,0" MouseDown="Barva_MouseDown"/>
+            
+            <!-- Rectangle s volbou modré barvy, aktuálně se změna barvy neukládá do kolekce pláten -->
             <Rectangle Height="30" Width="30" Fill="Blue" Margin="10,0,0,0" MouseDown="Barva_MouseDown"/>
         </StackPanel>
 
@@ -204,12 +218,15 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <!-- StackPanel s tlačítky Ulož a Smaž -->
+        
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+
+            <!-- Tlačítko Ulož -->
             <Button x:Name="ulozButton" Width="80" Height="30" Margin="10,0,0,0" Content="Ulož" Click="UlozButton_Click">
                 <Button.ToolTip>Uloží rozpracované / hotové plátno do seznamu</Button.ToolTip>
             </Button>
+
+            <!-- Tlačítko Smaž -->
             <Button x:Name="smazButton" Width="80" Height="30" Margin="10,0,0,0" Content="Smaž" Click="SmazButton_Click">
                 <Button.ToolTip>Zobrazí okno s plátny ke smazání</Button.ToolTip>
             </Button>

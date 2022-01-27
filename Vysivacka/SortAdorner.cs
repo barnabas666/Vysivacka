@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -15,7 +10,7 @@ namespace Vysivacka
     /// <summary>
     /// Třída sloužící k třídění dat v kolekci a vykreslení symbolu trojúhelníku
     /// </summary>
-    public class SortAdorner : Adorner
+    class SortAdorner : Adorner
     {
         // Vykreslí trojúhelník se šipkou nahoru - vzestupně
         private static Geometry ascGeometry = Geometry.Parse("M 0 4 L 3.5 0 L 7 4 Z");

@@ -16,6 +16,8 @@
 
         <!-- Rectangle sloužící jako pozadí pro Label -->
         <Rectangle Fill="LightGray" Height="50" Width="300" Margin="5"/>
+        
+        <!-- Label - Zadej své jméno -->
         <Label Content="ZADEJ SVÉ JMÉNO:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 
         <!-- TextBox pro zadání jména vyšívače -->

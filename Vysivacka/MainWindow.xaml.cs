@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace Vysivacka
 {
@@ -40,7 +32,6 @@ namespace Vysivacka
         /// </summary>
         private SortAdorner osobyListViewSortAdorner = null;
         private bool jeStisknutaPauza;
-        private bool blokujVse;
 
         /// <summary>
         /// Inicializuje formulář
@@ -86,7 +77,7 @@ namespace Vysivacka
                 vysivani.NastavPromennePodleStylu(0);
                 vysivani.timer.Start();                   // Spuštění timeru
             }
-            ZablokujVyber(blokujVse = true);
+            ZablokujVyber(true);
         }
 
         /// <summary>
@@ -195,7 +186,7 @@ namespace Vysivacka
         }
 
         /// <summary>
-        /// Vybere osobu vyšívače ze seznamu uložených pláten, nastavení proměnných a obnovení plátna
+        /// Vybere osobu vyšívače ze seznamu uložených pláten, nastavení kontrolek, proměnných a obnovení plátna
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -219,31 +210,8 @@ namespace Vysivacka
                 vysivani.VysivejUlozenePlatno();
                 jeStisknutaPauza = true;
                 spravceOsob.JmenoPoslednihoVysivace = vybranaOsoba.Jmeno;
-                ZablokujVyber(blokujVse = false);
+                ZablokujVyber(false);
             }
-        }
-
-        /// <summary>
-        /// Zablokuje použití kontrolek pro výběr stylu, vzoru, barvy a uložených pláten
-        /// </summary>
-        private void ZablokujVyber(bool all)
-        {
-            stylComboBox.IsEnabled = false;
-            vzorComboBox.IsEnabled = false;
-            barvaPlatnaComboBox.IsEnabled = false;
-            if (all)
-                osobyListView.IsEnabled = false;
-        }
-
-        /// <summary>
-        /// Odblokuje použití kontrolek pro výběr stylu, vzoru, barvy a uložených pláten
-        /// </summary>
-        private void OdblokujVyber()
-        {
-            stylComboBox.IsEnabled = true;
-            vzorComboBox.IsEnabled = true;
-            barvaPlatnaComboBox.IsEnabled = true;
-            osobyListView.IsEnabled = true;
         }
 
         /// <summary>
@@ -269,6 +237,29 @@ namespace Vysivacka
             osobyListViewSortAdorner = new SortAdorner(osobyListViewSortSloupec, novySmer); // Nová instance SortAdorner s vybraným sloupcem a směrem třídění
             AdornerLayer.GetAdornerLayer(osobyListViewSortSloupec).Add(osobyListViewSortAdorner); // Instance se přidá do záhlaví vybraného sloupce
             osobyListView.Items.SortDescriptions.Add(new SortDescription(sortBy, novySmer)); // Přidá SortDescription do ListView => určí, podle čeho a ve kterém směru se třídí
+        }
+
+        /// <summary>
+        /// Zablokuje použití kontrolek pro výběr stylu, vzoru, barvy a uložených pláten
+        /// </summary>
+        private void ZablokujVyber(bool all)
+        {
+            stylComboBox.IsEnabled = false;
+            vzorComboBox.IsEnabled = false;
+            barvaPlatnaComboBox.IsEnabled = false;
+            if (all)
+                osobyListView.IsEnabled = false;
+        }
+
+        /// <summary>
+        /// Odblokuje použití kontrolek pro výběr stylu, vzoru, barvy a uložených pláten
+        /// </summary>
+        private void OdblokujVyber()
+        {
+            stylComboBox.IsEnabled = true;
+            vzorComboBox.IsEnabled = true;
+            barvaPlatnaComboBox.IsEnabled = true;
+            osobyListView.IsEnabled = true;
         }
     }
 }
